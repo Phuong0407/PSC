@@ -1,0 +1,5 @@
+gfortran -c dense_linear_system.f90
+gfortran -c csr_sparse_matrix.f90
+gfortran -c streamline_solution_triangular.f90
+gfortran -o streamline_function_inlet_solution dense_linear_system.f90 csr_sparse_matrix.f90 streamline_solution_triangular.f90 streamline_function_inlet_solution.f90
+./streamline_function_inlet_solution

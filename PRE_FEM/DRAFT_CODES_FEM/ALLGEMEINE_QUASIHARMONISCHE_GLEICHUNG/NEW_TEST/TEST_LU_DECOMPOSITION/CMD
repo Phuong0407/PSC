@@ -1,0 +1,3 @@
+gfortran -c dense_linear_system.f90
+gfortran -o test_lu_decomposition dense_linear_system.f90 test_lu_decomposition.o
+./test_lu_decomposition

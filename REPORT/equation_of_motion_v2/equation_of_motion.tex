@@ -1,0 +1,118 @@
+\documentclass[12pt, a4paper]{article}
+
+
+\usepackage{amsmath}
+\usepackage[inner = 2cm, outer = 2cm]{geometry}
+
+
+\begin{document}
+
+\section{Equation of Motion}
+
+The objective of this problem is to simulate the motion of a perpendicular cuboid immersed in a prescribed flow field. The flow field is specified as the flow of air at the inlet of an turbofan engine of a typical aircraft.
+
+
+To achieve this, we first identify the primary forces responsible for the body’s motion. These forces include aerodynamic forces and gravity. However, due to the dominance of the flow field, the influence of gravity is considered negligible and will be omitted from the analysis.
+
+
+In this formulation, we adopt the following notation convention:
+\begin{enumerate}
+	\item Uppercase letters denote quantities expressed in the inertial (space-fixed) frame.
+	\item Lowercase letters denote quantities expressed in the body-fixed coordinate system.
+\end{enumerate}
+
+This distinction allows for clear separation of physical quantities defined in different reference frames and facilitates the transformation between them during integration of the equations of motion.
+
+In the inertial frame, we write simply that
+\begin{align}
+	\dfrac{d\vec{V}}{dt} = \dfrac{\vec{F}}{m}
+\end{align}
+where $\vec{F}$ is the aerodynamic force in inertial frame. We will not write its components directly as it is modelling in the body-fixed frame by using force coefficient:
+\begin{align}
+	F_x = \dfrac{1}{2} \rho_\infty V_\infty^2 L C_x, \quad F_y = \dfrac{1}{2} \rho_\infty V_\infty^2 L C_y \quad \text{and} \quad F_z = \dfrac{1}{2} \rho_\infty V_\infty^2 L C_z.
+\end{align}
+Note that in this writing, $x$, $y$ $z$ is the direction of the body-fixed frame. We write this force in vector form as $\vec{f}$.
+
+We could transform this force to the inertial frame by using quaternion, $q := (q_0, q_1, q_2, q_3)$ such that:
+\begin{align}
+\vec{F} = q \cdot \vec{f} \cdot q^{-1}
+\end{align}
+
+
+We do the same thing for the equation of moment. Using the origine at the center of the cuboid, Euler's equation could be written in body-fixed frame:
+\begin{align}
+	M_x & = I_{xx}\dot{\omega}_x - (I_{yy} - I_{zz})\omega_y \omega_z \\
+	M_y & = I_{yy}\dot{\omega}_y - (I_{zz} - I_{xx})\omega_z \omega_x \\
+	M_z & = I_{zz}\dot{\omega}_z - (I_{xx} - I_{yy})\omega_x \omega_y
+\end{align}
+which we can written as:
+\begin{align}
+	\vec{M} = I \dot{\vec{\omega}} + \vec{\omega} \times (I \vec{\omega})
+\end{align}
+where the moment could be calculate from the following equations:
+\begin{align}
+	M_x = \dfrac{1}{2} \rho_\infty V_\infty^2 LH C_{M_x}, \quad M_y = \dfrac{1}{2} \rho_\infty V_\infty^2 LH C_{M_y} \quad \text{and} \quad M_z = \dfrac{1}{2} \rho_\infty V_\infty^2 LH C_{M_z}.
+\end{align}
+
+The quarternion satisfy the following equation:
+\begin{align}
+	\dfrac{dq}{dt} = \dfrac{1}{2} q \vec{\omega} = \dfrac{1}{2}
+	\begin{bmatrix}
+		0 & -\omega_x & -\omega_y & -\omega_z \\
+		\omega_x & 0 & \omega_z & -\omega_y \\
+		\omega_y & -\omega_z & 0 & \omega_x \\
+		\omega_z & \omega_y & -\omega_x & 0 \\
+	\end{bmatrix}\begin{bmatrix}
+		q_0 \\
+		q_1 \\
+		q_2 \\
+		q_3 \\
+	\end{bmatrix}
+\end{align}
+
+
+\begin{equation}
+	\boxed{
+	\begin{aligned}
+		& \dot{\vec{R}} = \vec{V} \\
+		& \dot{\vec{V}} = \dfrac{1}{m} q \cdot \vec{f} \cdot q^{-1} \\
+		& \dot{\vec{\omega}} = I^{-1} \left(\vec{M} - \vec{\omega} \times (I \vec{\omega}) \right) \\
+		& \dot{q} = \dfrac{1}{2} q \otimes \vec{\omega}
+	\end{aligned}}
+\end{equation}
+
+This equation is a closed system and integrable if we know the initial condition of this equation. In element-wise, we have:
+
+\begin{equation}
+	\begin{aligned}
+		\dot{X} & = V_X \\
+		\dot{Y} & = V_Y \\
+		\dot{Z} & = V_Z \\
+		\dot{V_X} & = \dfrac{1}{m} \left[ (1 - 2 q_2^2 - 2 q_3^2) f_x + 2(q_1 q_2 - q_0 q_3) f_y + 2(q_3 q_1 + q_0 q_2) f_z \right] \\
+		\dot{V_Y} & = \dfrac{1}{m} \left[ 2(q_1 q_2 + q_0 q_3) f_y + (1 - 2 q_3^2 - 2 q_1^2) f_y + 2(q_2 q_3 - q_0 q_1) f_z \right] \\
+		\dot{V_Z} & = \dfrac{1}{m} \left[ 2(q_3 q_1 - q_0 q_2) f_x + 2(q_2 q_3 + q_0 q_1) f_y + (1 - 2 q_1^2 - 2 q_2^2) f_z \right] \\
+		\omega_x & = \dfrac{1}{I_{xx}} \left( M_x + (I_{yy} - I_{zz}) \omega_y \omega_z \right) \\
+		\omega_y & = \dfrac{1}{I_{yy}} \left( M_y + (I_{zz} - I_{xx}) \omega_z \omega_x \right) \\
+		\omega_z & = \dfrac{1}{I_{zz}} \left( M_z + (I_{xx} - I_{yy}) \omega_x \omega_y \right) \\
+		\dot{q_0} & = - \dfrac{1}{2} \left( q_1 \omega_x + q_2 \omega_y + q_3 \omega_z \right) \\
+		\dot{q_1} & = \dfrac{1}{2} \left( q_0 \omega_x + q_2 \omega_z - q_3 \omega_y \right) \\
+		\dot{q_2} & = \dfrac{1}{2} \left( q_0 \omega_x + q_3 \omega_x - q_1 \omega_z \right) \\
+		\dot{q_3} & = \dfrac{1}{2} \left( q_0 \omega_x + q_1 \omega_y - q_2 \omega_x \right) \\
+	\end{aligned}
+\end{equation}
+
+Note that the quarternion used in this system always has the norm 1:
+\begin{align}
+	q_0^2 + q_1^2 + q_2^2 + q_3^2 = 1.
+\end{align}
+
+With the initial condition, where $X(0) = X_0$, $Y(0) = Y_0$, $Z(0) = Z_0$, $V_x(0) = V_y(0) = V_z(0) = 0$, $\omega_x(0) = \omega_y(0) = \omega_z(0) = 0$ and $q(0) = (1, 0, 0, 0)$, we can integrate numerically this system to get the solution.
+
+remark: in the first version of the 3D-motion equation, we use Euler's angles as the orientation description, but it has the downside of gimbal lock. With the use of quarternion, we will save memory as do not store the equation as matrix and avoid gimbal lock.
+
+
+% \section{Aerodynamic Forces and Moments}
+
+% We will use OpenFOAM as the program to calculate $C_x$, $C_y$, $C_z$ and $C_{M_x}$, $C_{M_y}$, $C_{M_z}$ of the flow acts on the perpendicular cuboid. We just assume that the displacement of a small cuboid will not pertubate sustainsably the flow so that we could apply a simplified framework of decouple flow: we will solve for the global flow separately and prescribed it. Denote by $\vec{U}(X, Y, Z)$ this prescribed flow. Then we will solve for the external flow through the cuboid to simulate the effect of the aerodynamic acts on the flow. 
+
+\end{document}

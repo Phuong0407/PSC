@@ -1,0 +1,24 @@
+gfortran -c streamline_solution.f90
+gfortran -o test_grid streamline_solution.f90 test_grid.f90
+./test_grid
+
+
+
+gfortran -c streamline_solution.f90
+gfortran -c csr_sparse_matrix.f90
+gfortran -o streamline_function_inlet_solution streamline_solution.f90 csr_sparse_matrix.f90 streamline_function_inlet_solution.f90
+./streamline_function_inlet_solution
+
+
+gfortran -c csr_sparse_matrix.f90
+gfortran -c dense_linear_system.f90
+gfortran -c streamline_solution_triangular.f90
+gfortran -o streamline_function_inlet_solution streamline_solution_triangular.f90 csr_sparse_matrix.f90 dense_linear_system.f90 streamline_function_inlet_solution.f90
+./streamline_function_inlet_solution
+
+
+
+gfortran -c streamline_solution_triangular_axisym.f90
+gfortran -c csr_sparse_matrix.f90
+gfortran -o streamline_function_inlet_solution streamline_solution_triangular_axisym.f90 csr_sparse_matrix.f90 streamline_function_inlet_solution.f90
+./streamline_function_inlet_solution

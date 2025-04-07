@@ -1,0 +1,227 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage[margin=1in,a3paper]{geometry}
+
+\begin{document}
+
+% \[
+% \begin{aligned}
+% 	& u_{ji}^{n+1}\left(\dfrac{\Delta x \Delta y}{\Delta t} + \dfrac{2}{Re}\dfrac{\Delta y}{\Delta x} + \dfrac{2}{Re}\dfrac{\Delta x}{\Delta y}\right) - \dfrac{\Delta x \Delta y}{\Delta t}u_{jk}^n \\
+% 	& + \Delta y \left(p_{j+1,k}^{n+1} - p_{j,k}^{n+1}\right) - \dfrac{1}{Re} \left(u_{j+1,k}^{n+1} + u_{j-1,k}^{n+1} + u_{j,k+1}^{n+1} + u_{j,k-1}^{n+1}\right) \\
+% 	& + \Delta y\left[\dfrac{1}{4}(u_{j+1,k}^{n} + u_{j,k}^{n})(u_{j+1,k}^{n+1} + u_{j,k}^{n+1}) - \dfrac{1}{4}(u_{j-1,k}^{n} + u_{j,k}^{n})(u_{j-1,k}^{n+1} + u_{j,k}^{n+1})\right] \\
+% 	& + \Delta x \left[\dfrac{1}{4}(v_{j,k}^{n} + v_{j+1,k}^{n})(u_{j,k}^{n+1} + u_{j,k+1}^{n+1}) - \dfrac{1}{4}(v_{j,k-1}^{n} + v_{j+1,k-1}^{n})(u_{j,k-1}^{n+1} + u_{j,k}^{n+1})\right] = 0
+% \end{aligned}
+% \]
+
+% *****************************************
+
+% \[
+% \begin{aligned}
+% 	& \left[\dfrac{\Delta x \Delta y}{\Delta t} + \dfrac{2}{Re}\left(\dfrac{\Delta x}{\Delta y} + \dfrac{\Delta y}{\Delta x}\right) + \dfrac{\Delta y}{4}\left(u_{j+1,k}^n - u_{j-1,k}^n\right) + \dfrac{\Delta x}{4}\left(v_{j,k}^n + v_{j+1,k}^n - v_{j,k-1}^n - v_{j+1,k-1}^n\right)\right] u_{ji}^{n+1} \\
+% 	& + \left[-\dfrac{1}{Re} + \dfrac{\Delta y}{4}\left(u_{j+1,k}^n + u_{j,k}^n\right)\right] u_{j+1,k}^{n+1} \\
+% 	& + \left[-\dfrac{1}{Re} - \dfrac{\Delta y}{4}\left(u_{j-1,k}^n + u_{j,k}^n\right)\right] u_{j-1,k}^{n+1} \\
+% 	& + \left[-\dfrac{1}{Re} + \dfrac{\Delta x}{4}\left(v_{j,k}^n + v_{j+1,k}^n\right)\right] u_{j,k+1}^{n+1} \\
+% 	& + \left[-\dfrac{1}{Re} - \dfrac{\Delta x}{4}\left(v_{j,k-1}^n + v_{j+1,k-1}^n\right)\right] u_{j,k-1}^{n+1} \\
+% 	& - \dfrac{\Delta x \Delta y}{\Delta t} u_{jk}^n\\
+% 	& + \Delta y \left(p_{j+1,k}^{n+1} - p_{j,k}^{n+1}\right) = 0
+% \end{aligned}
+% \]
+
+
+% For the continuity equation:
+% \[
+% \dfrac{\partial u}{\partial x} + \dfrac{\partial v}{\partial y} + \dfrac{\partial w}{\partial z} = 0.
+% \]
+% \[
+% \begin{aligned}
+% 	& \dfrac{u_{i+1,j,k}^{n+1} - u_{i,j,k}^{n+1}}{\Delta x} + \dfrac{u_{i,+1,k}^{n+1} - u_{i,j,k}^{n+1}}{\Delta y} + \dfrac{u_{i,j,k+1}^{n+1} - u_{i,j,k}^{n+1}}{\Delta z} = 0. \\
+% 	\Longleftrightarrow & \boxed{{\Delta y \Delta z}\left({u_{i+1,j,k}^{n+1} - u_{i,j,k}^{n+1}}\right) + {\Delta x \Delta z}\left({u_{i,+1,k}^{n+1} - u_{i,j,k}^{n+1}}\right) + {\Delta x \Delta y}\left({u_{i,j,k+1}^{n+1} - u_{i,j,k}^{n+1}}\right) = 0}.
+% \end{aligned}
+% \]
+
+
+% \[
+% \dfrac{\partial u}{\partial t} + \dfrac{\partial}{\partial x}\left(u^2 - \dfrac{1}{Re} \dfrac{\partial u}{\partial x}\right) + \dfrac{\partial}{\partial y}\left(uv - \dfrac{1}{Re} \dfrac{\partial u}{\partial y}\right) + \dfrac{\partial}{\partial z}\left(uw - \dfrac{1}{Re} \dfrac{\partial u}{\partial z}\right) = -\dfrac{\partial p}{\partial x}
+% \]
+
+% \[
+% \begin{aligned}
+% 	& \dfrac{u_{i,j,k}^{n+1} - u_{i,j,k}^{n}}{\Delta t} + \dfrac{F_{i+1/2,j,k}^{(1)} - F_{i-1/2,j,k}^{(1)}}{\Delta x} + \dfrac{G_{i,j+1/2,k}^{(1)} - G_{i,j-1/2,k}^{(1)}}{\Delta y} + \dfrac{H_{i,j,k+1/2}^{(1)} - H_{i,j,k-1/2}^{(1)}}{\Delta z} = -\dfrac{p_{i+1,j,k}^{n+1} - p_{i,j,k}^{n+1}}{\Delta x} \\
+% 	\Longleftrightarrow & \left(\dfrac{\Delta x \Delta y \Delta z}{\Delta t}\right) \left(u_{i,j,k}^{n+1} - u_{i,j,k}^{n}\right) + {\Delta y \Delta z}\left(F_{i+1/2,j,k}^{(1)} - F_{i-1/2,j,k}^{(1)}\right) + {\Delta x \Delta z}\left(G_{i,j+1/2,k}^{(1)} - G_{i,j-1/2,k}^{(1)}\right) + {\Delta x \Delta y}\left(H_{i,j,k+1/2}^{(1)} - H_{i,j,k-1/2}^{(1)}\right) = {\Delta y \Delta z} \left(p_{i+1,j,k}^{n+1} - p_{i,j,k}^{n+1}\right) \\
+% 	\Longleftrightarrow & \left(\dfrac{\Delta x \Delta y \Delta z}{\Delta t}\right) \left(u_{i,j,k}^{n+1} - u_{i,j,k}^{n}\right) \\
+% 	& + {\Delta y \Delta z}\left(\dfrac{1}{4}\left(u_{i+1,j,k}^n + u_{i,j,k}^n\right)\left(u_{i+1,j,k}^{n+1} + u_{i,j,k}^{n+1}\right) - \dfrac{1}{4}\left(u_{i,j,k}^n + u_{i-1,j,k}^n\right)\left(u_{i,j,k}^{n+1} + u_{i-1,j,k}^{n+1}\right) - \dfrac{1}{Re}\dfrac{u_{i+1,j,k}^{n+1} + u_{i-1,j,k}^{n+1} - 2u_{i,j,k}^{n+1}}{\Delta x} \right)\\
+% 	& + {\Delta x \Delta z}\left(\dfrac{1}{4}\left(v_{i,j,k}^{n} + v_{i+1,j,k}^{n}\right)\left(u_{i,j,k}^{n+1} + u_{i,j+1,k}^{n+1}\right) - \dfrac{1}{4}\left(v_{i,j-1,k}^{n} + v_{i+1,j-1,k}^{n}\right)\left(u_{i,j-1,k}^{n+1} + u_{i,j,k}^{n+1}\right) - \dfrac{1}{Re} \dfrac{u_{i,j+1,k}^{n+1} + u_{i,j-1,k}^{n+1} - 2u_{i,j,k}^{n+1}}{\Delta y}\right) \\
+% 	& + {\Delta x \Delta y}\left(\dfrac{1}{4}\left(w_{i,j,k}^{n} + w_{i+1,j,k}^{n}\right)\left(u_{i,j,k}^{n+1} + u_{i,j,k+1}^{n+1}\right) - \dfrac{1}{4}\left(w_{i,j,k-1}^{n} + w_{i+1,j,k-1}^{n}\right)\left(u_{i,j,k-1}^{n+1} + u_{i,j,k}^{n+1}\right) - \dfrac{1}{Re}\dfrac{u_{i,j,k+1}^{n+1} + u_{i,j,k-1}^{n+1} - 2u_{i,j,k}^{n+1}}{\Delta z}\right) \\
+% 	& = {\Delta y \Delta z} \left(p_{i+1,j,k}^{n+1} - p_{i,j,k}^{n+1}\right) \\
+% 	\Longleftrightarrow & \left[\dfrac{\Delta x \Delta y \Delta z}{\Delta t} + \dfrac{2}{Re}\left(\dfrac{\Delta y \Delta z}{\Delta x} + \dfrac{\Delta x \Delta z}{\Delta y} + \dfrac{\Delta x \Delta y}{\Delta z}\right) + \dfrac{\Delta y \Delta z}{4}\left(u_{i+1,j,k}^n - u_{i-1,j,k}^n\right) \right. \\
+% 	& \left. \ + \dfrac{\Delta x \Delta z}{4}\left(v_{i,j,k}^n + v_{i+1,j,k}^{n} - v_{i,j-1,k}^{n} - v_{i+1,j-1,k}^n\right) + \dfrac{\Delta x \Delta y}{4}\left(w_{i,j,k}^n + w_{i+1,j,k}^n - w_{i,j,k-1}^n - w_{i+1,j,k-1}^n\right)\right] u_{i,j,k}^{n+1} \\
+% 	& + \left[\dfrac{\Delta y \Delta z}{4} \left(u_{i+1,j,k}^n + u_{i,j,k}^n\right) - \dfrac{1}{Re}\dfrac{1}{\Delta x}\right]u_{i+1,j,k}^{n+1} + \left[ - \dfrac{\Delta y \Delta z}{4} \left(u_{i,j,k}^n + u_{i-1,j,k}^n\right) - \dfrac{1}{Re}\dfrac{1}{\Delta x}\right]u_{i-1,j,k}^{n+1} \\
+% 	& + \left[\dfrac{\Delta x \Delta z}{4} \left(v_{i,j,k}^n + v_{i+1,j,k}^n\right) - \dfrac{1}{Re}\dfrac{1}{\Delta y}\right]u_{i,j+1,k}^{n+1} + \left[ - \dfrac{\Delta x \Delta z}{4} \left(v_{i,j-1,k}^n + v_{i+1,j-1,k}^n\right) - \dfrac{1}{Re}\dfrac{1}{\Delta y}\right]u_{i,j-1,k}^{n+1} \\
+% 	& + \left[\dfrac{\Delta x \Delta y}{4} \left(w_{i,j,k}^n + w_{i+1,j,k}^n\right) - \dfrac{1}{Re}\dfrac{1}{\Delta y}\right]u_{i,j,k+1}^{n+1} + \left[ - \dfrac{\Delta x \Delta y}{4} \left(w_{i,j,k-1}^n + w_{i+1,j,k-1}^n\right) - \dfrac{1}{Re}\dfrac{1}{\Delta y}\right]u_{i,j,k-1}^{n+1} \\
+% 	& - \dfrac{\Delta x \Delta y \Delta z}{\Delta t} u_{i,j,k}^n \\
+% 	& = {\Delta y \Delta z} \left(p_{i+1,j,k}^{n+1} - p_{i,j,k}^{n+1}\right)
+% \end{aligned}
+% \]
+
+% \[
+% \dfrac{\partial v}{\partial t} + \dfrac{\partial}{\partial x}\left(uv - \dfrac{1}{Re} \dfrac{\partial v}{\partial x}\right) + \dfrac{\partial}{\partial y}\left(v^2 - \dfrac{1}{Re} \dfrac{\partial v}{\partial y}\right) + \dfrac{\partial}{\partial z}\left(vw - \dfrac{1}{Re} \dfrac{\partial v}{\partial z}\right) = -\dfrac{\partial p}{\partial y}
+% \]
+
+% \[
+% \begin{aligned}
+% & \dfrac{u_{i,j,k}^{n+1} - u_{i,j,k}^{n}}{\Delta t} + \dfrac{F_{i+1/2,j,k}^{(2)} - F_{i-1/2,j,k}^{(2)}}{\Delta x} + \dfrac{G_{i,j+1/2,k}^{(2)} - G_{i,j-1/2,k}^{(2)}}{\Delta y} + \dfrac{H_{i,j,k+1/2}^{(2)} - H_{i,j,k-1/2}^{(2)}}{\Delta z} = -\dfrac{p_{i,j+1,k}^{n+1} - p_{i,j,k}^{n+1}}{\Delta y} \\
+% \Longleftrightarrow & \dfrac{\Delta x \Delta y \Delta z}{\Delta t} \left(u_{i,j,k}^{n+1} - u_{i,j,k}^{n}\right) + {\Delta y \Delta z} \left[\dfrac{1}{4}\right]
+% \end{aligned}
+% \]
+
+% \[
+% \dfrac{\partial w}{\partial t} + \dfrac{\partial}{\partial x}\left(wu - \dfrac{1}{Re} \dfrac{\partial w}{\partial x}\right) + \dfrac{\partial}{\partial y}\left(vw - \dfrac{1}{Re} \dfrac{\partial w}{\partial y}\right) + \dfrac{\partial}{\partial z}\left(w^2 - \dfrac{1}{Re} \dfrac{\partial w}{\partial z}\right) = -\dfrac{\partial p}{\partial z}
+% \]
+
+
+
+
+
+% \[
+% \begin{aligned}
+% 	\dfrac{u_{i,j,k}^{n+1} - u_{i,j,k}^{n}}{\Delta t} + \dfrac{u_{i+1,j,k}^{n+1} - \textbf{}}{\partial x} + v \dfrac{\partial u}{\partial y} + w \dfrac{\partial u}{\partial z} = -\dfrac{\partial p}{\partial x} + \dfrac{1}{Re} \left( \dfrac{\partial^2 u}{\partial x^2} + \dfrac{\partial^2 u}{\partial y^2} + \dfrac{\partial^2 u}{\partial z^2} \right),
+% \end{aligned}
+% \]
+
+\[
+\begin{aligned}
+    \dfrac{\partial \rho}{\partial t} + \dfrac{\partial u}{\partial x} + \dfrac{\partial v}{\partial y} + \dfrac{\partial w}{\partial z} = 0
+\end{aligned}
+\]
+
+
+\[
+\begin{aligned}
+    \dfrac{\partial u}{\partial t} + R \dfrac{\partial u^2}{\partial x} + R\dfrac{\partial uv}{\partial y} + R\dfrac{\partial uw}{\partial z} = -\dfrac{\partial p}{\partial x} + \dfrac{\partial^2 u}{\partial x^2} + \dfrac{\partial^2 u}{\partial y^2} + \dfrac{\partial^2 u}{\partial z^2}
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+    \dfrac{\partial v}{\partial t} + R \dfrac{\partial vu}{\partial x} + R\dfrac{\partial v^2}{\partial y} + R\dfrac{\partial vw}{\partial z} = -\dfrac{\partial p}{\partial y} + \dfrac{\partial^2 v}{\partial x^2} + \dfrac{\partial^2 v}{\partial y^2} + \dfrac{\partial^2 v}{\partial z^2}
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+    \dfrac{\partial w}{\partial t} + R \dfrac{\partial wu}{\partial x} + R\dfrac{\partial wv}{\partial y} + R\dfrac{\partial w^2}{\partial z} = -\dfrac{\partial p}{\partial x} + \dfrac{\partial^2 w}{\partial x^2} + \dfrac{\partial^2 w}{\partial y^2} + \dfrac{\partial^2 w}{\partial z^2}
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+    p = \rho/\delta
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+    \dfrac{u_{i,j,k}^{n+1} - u_{i,j,k}^{n}}{\Delta t} = & - R \dfrac{(u_{i+1,j,k}^n)^2 - (u_{i,j,k}^n)^2}{\Delta x} \\
+    & - R \dfrac{u_{i,j+1,k}^n v_{i,j+1,k}^n - u_{i,j,k}^n v_{i,j,k}^n}{\Delta y} \\
+    & - R \dfrac{u_{i,j,k+1}^n w_{i,j,k+1}^n - u_{i,j,k}^n w_{i,j,k}^n}{\Delta z} \\
+    & + \dfrac{u_{i+1,j,k}^n + u_{i-1,j,k}^n - u_{i,j,k}^n - u_{i,j,k}^{n+1}}{\Delta x^2} \\
+    & + \dfrac{u_{i,j+1,k}^n + u_{i,j-1,k}^n - u_{i,j,k}^n - u_{i,j,k}^{n+1}}{\Delta y^2} \\
+    & + \dfrac{u_{i,j,k-1}^n + u_{i,j,k-1}^n - u_{i,j,k}^n - u_{i,j,k}^{n+1}}{\Delta z^2} \\
+    & - \dfrac{1}{\delta \Delta x}(\rho_{i+1,j}^n - \rho_{i,j}^n)
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+    \dfrac{v_{i,j,k}^{n+1} - v_{i,j,k}^n}{\Delta t} = & - R \dfrac{v_{i+1,j,k}^n u_{i+1,j,k}^n - v_{i,j,k}^n u_{i,j,k}^n}{\Delta x} \\
+    & - R \dfrac{(v_{i,j+1,k}^n)^2 - (v_{i,j,k}^n)^2}{\Delta y} \\
+    & - R \dfrac{v_{i,j,k+1}^n w_{i,j,k+1}^n - v_{i,j,k}^n w_{i,j,k}^n}{\Delta z} \\
+    & -\dfrac{\rho_{i,j+1,k}^n - \rho_{i,j,k}^n}{\delta \Delta y} \\
+    & + \dfrac{v_{i+1,j,k}^n + v_{i-1,j,k}^n - v_{i,j,k}^n - v_{i,j,k}^{n+1}}{\Delta x^2} \\
+    & + \dfrac{v_{i,j+1,k}^n + v_{i,j-1,k}^n - v_{i,j,k}^n - v_{i,j,k}^{n+1}}{\Delta y^2} \\
+    & + \dfrac{v_{i,j,k+1}^n + v_{i,j,k-1}^n - v_{i,j,k}^n - v_{i,j,k}^{n+1}}{\Delta z^2}.
+\end{aligned}
+\]
+
+
+\[
+\begin{aligned}
+    \dfrac{w_{i,j,k}^{n+1} - w_{i,j,k}^n}{\Delta t} = & - R \dfrac{w_{i+1,j,k}^n u_{i+1,j,k}^n - w_{i,j,k}^n u_{i,j,k}^n}{\Delta x} \\
+	& - R \dfrac{w_{i,j+1,k}^n v_{i,j+1,k}^n - w_{i,j,k}^n v_{i,j,k}^n}{\Delta y} \\
+    & - R \dfrac{(w_{i,j,k+1}^n)^2 - (w_{i,j,k}^n)^2}{\Delta z} \\
+	& - \dfrac{\rho_{i,j,k+1}^n - \rho_{i,j,k}^n}{\delta \Delta z} \\
+    & + \dfrac{w_{i+1,j,k}^n + w_{i-1,j,k}^n - w_{i,j,k}^n - w_{i,j,k}^{n+1}}{\Delta x^2} \\
+	& + \dfrac{w_{i,j+1,k}^n + w_{i,j-1,k}^n - w_{i,j,k}^n - w_{i,j,k}^{n+1}}{\Delta y^2} \\
+    & + \dfrac{w_{i,j,k+1}^n + w_{i,j,k-1}^n - w_{i,j,k}^n - w_{i,j,k}^{n+1}}{\Delta z^2}.
+\end{aligned}
+\]
+
+\newpage
+
+\[
+\begin{aligned}
+    & \left[ 1 + 2\left(\dfrac{\Delta t}{\Delta x^2} + \dfrac{\Delta t}{\Delta y^2} + \dfrac{\Delta t}{\Delta z^2}\right) \right] u_{i,j,k}^{n+1} + \dfrac{\Delta t}{\Delta x^2} \left[ u_{i+1,j,k}^{n+1} + u_{i-1,j,k}^{n+1} \right] + \dfrac{\Delta t}{\Delta y^2} \left[ u_{i,j+1,k}^{n+1} + u_{i,j-1,k}^{n+1} \right] + \dfrac{\Delta t}{\Delta z^2} \left[ u_{i,j,k-1}^{n+1} + u_{i,j,k-1}^{n+1} \right] \\
+	= & u_{i,j,k}^{n} - \dfrac{R \Delta t}{\Delta x} \left[(u_{i+1,j,k}^n)^2 - (u_{i,j,k}^n)^2\right] - \dfrac{R \Delta t}{\Delta y} \left[u_{i,j+1,k}^n v_{i,j+1,k}^n - u_{i,j,k}^n v_{i,j,k}^n \right] - \dfrac{R \Delta t}{\Delta z} \left[ u_{i,j,k+1}^n w_{i,j,k+1}^n - u_{i,j,k}^n w_{i,j,k}^n \right] - \dfrac{\Delta t}{\delta \Delta x}(\rho_{i+1,j}^n - \rho_{i,j}^n)
+\end{aligned}
+\]
+
+================================
+
+\[
+\begin{aligned}
+    & \left[ 1 + 2\left(\dfrac{\Delta t}{\Delta x^2} + \dfrac{\Delta t}{\Delta y^2} + \dfrac{\Delta t}{\Delta z^2}\right) \right] v_{i,j,k}^{n+1} + \dfrac{\Delta t}{\Delta x^2} \left[ v_{i+1,j,k}^{n+1} + v_{i-1,j,k}^{n+1} \right] + \dfrac{\Delta t}{\Delta y^2} \left[ v_{i,j+1,k}^{n+1} + v_{i,j-1,k}^{n+1} \right] + \dfrac{\Delta t}{\Delta z^2} \left[ v_{i,j,k+1}^{n+1} + v_{i,j,k-1}^{n+1} \right] \\
+	= & v_{i,j,k}^n - \dfrac{R \Delta t}{\Delta x} \left[ v_{i+1,j,k}^n u_{i+1,j,k}^n - v_{i,j,k}^n u_{i,j,k}^n \right] - \dfrac{R \Delta t}{\Delta y} \left[ (v_{i,j+1,k}^n)^2 - (v_{i,j,k}^n)^2 \right] - \dfrac{R \Delta t}{\Delta z} \left[ v_{i,j,k+1}^n w_{i,j,k+1}^n - v_{i,j,k}^n w_{i,j,k}^n \right] - \dfrac{\Delta t}{\delta \Delta y} \left[ \rho_{i,j+1,k}^n - \rho_{i,j,k}^n \right]
+\end{aligned}
+\]
+
+================================
+
+\[
+\begin{aligned}
+    & \left[ 1 + 2\left(\dfrac{\Delta t}{\Delta x^2} + \dfrac{\Delta t}{\Delta y^2} + \dfrac{\Delta t}{\Delta z^2}\right) \right] w_{i,j,k}^{n+1} + \dfrac{\Delta t}{\Delta x^2} \left[ w_{i+1,j,k}^{n+1} + w_{i-1,j,k}^{n+1} \right] + \dfrac{\Delta t}{\Delta y^2} \left[ w_{i,j+1,k}^{n+1} + w_{i,j-1,k}^{n+1}  \right] + \dfrac{\Delta t}{\Delta z^2} \left[ w_{i,j,k+1}^{n+1} + w_{i,j,k-1}^{n+1} \right] \\
+	= & w_{i,j,k}^n - \dfrac{R \Delta t}{\Delta x} \left[ w_{i+1,j,k}^n u_{i+1,j,k}^n - w_{i,j,k}^n u_{i,j,k}^n \right] - \dfrac{R \Delta t}{\Delta y} \left[ w_{i,j+1,k}^n v_{i,j+1,k}^n - w_{i,j,k}^n v_{i,j,k}^n \right] - \dfrac{R \Delta t}{\Delta z} \left[ (w_{i,j,k+1}^n)^2 - (w_{i,j,k}^n)^2 \right] - \dfrac{\Delta t}{\delta \Delta z}\left[ \rho_{i,j,k+1}^n - \rho_{i,j,k}^n \right].
+\end{aligned}
+\]
+
+\newpage
+
+\textbf{Fully-explicit Scheme}
+
+\[
+\begin{aligned}
+    \left( 1 + \dfrac{\Delta t}{\Delta x^2} + \dfrac{\Delta t}{\Delta y^2} + \dfrac{\Delta t}{\Delta z^2} \right) u_{i,j,k}^{n+1} = & u_{i,j,k}^{n} - \dfrac{R\Delta t}{\Delta x} \left[(u_{i+1,j,k}^n)^2 - (u_{i,j,k}^n)^2 \right] - \dfrac{R\Delta t}{\Delta y} \left[u_{i,j+1,k}^n v_{i,j+1,k}^n - u_{i,j,k}^n v_{i,j,k}^n \right] - \dfrac{R\Delta t}{\Delta z} \left[u_{i,j,k+1}^n w_{i,j,k+1}^n - u_{i,j,k}^n w_{i,j,k}^n \right] \\
+    & + \dfrac{\Delta t}{\Delta x^2} \left[ u_{i+1,j,k}^n + u_{i-1,j,k}^n - u_{i,j,k}^n \right] + \dfrac{\Delta t}{\Delta y^2} \left[ u_{i,j+1,k}^n + u_{i,j-1,k}^n - u_{i,j,k}^n \right] + \dfrac{\Delta t}{\Delta z^2} \left[ u_{i,j,k-1}^n + u_{i,j,k-1}^n - u_{i,j,k}^n \right] \\
+    & - \dfrac{\Delta t}{\delta \Delta x}(\rho_{i+1,j}^n - \rho_{i,j}^n)
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+    \left( 1 + \dfrac{\Delta t}{\Delta x^2} + \dfrac{\Delta t}{\Delta y^2} + \dfrac{\Delta t}{\Delta z^2} \right) v_{i,j,k}^{n+1} = & v_{i,j,k}^n - - \dfrac{R\Delta t}{\Delta x} \left[ v_{i+1,j,k}^n u_{i+1,j,k}^n - v_{i,j,k}^n u_{i,j,k}^n \right] - \dfrac{R\Delta t}{\Delta y} \left[ (v_{i,j+1,k}^n)^2 - (v_{i,j,k}^n)^2 \right] - \dfrac{R\Delta t}{\Delta z} \left[ v_{i,j,k+1}^n w_{i,j,k+1}^n - v_{i,j,k}^n w_{i,j,k}^n \right] \\
+    & + \dfrac{\Delta t}{\Delta x^2} \left[ v_{i+1,j,k}^n + v_{i-1,j,k}^n - v_{i,j,k}^n \right] + \dfrac{\Delta t}{\Delta y^2} \left[ v_{i,j+1,k}^n + v_{i,j-1,k}^n - v_{i,j,k}^n \right] + \dfrac{\Delta t}{\Delta z^2} \left[ v_{i,j,k+1}^n + v_{i,j,k-1}^n - v_{i,j,k}^n \right] \\
+    & -\dfrac{\Delta t}{\delta \Delta y}\left( \rho_{i,j+1,k}^n - \rho_{i,j,k}^n \right)
+\end{aligned}
+\]
+
+
+\[
+\begin{aligned}
+    \left( 1 + \dfrac{\Delta t}{\Delta x^2} + \dfrac{\Delta t}{\Delta y^2} + \dfrac{\Delta t}{\Delta z^2} \right) w_{i,j,k}^{n+1} = & w_{i,j,k}^n - \dfrac{R \Delta t}{\Delta x} \left[ w_{i+1,j,k}^n u_{i+1,j,k}^n - w_{i,j,k}^n u_{i,j,k}^n \right] - \dfrac{R \Delta t}{\Delta y} \left[ w_{i,j+1,k}^n v_{i,j+1,k}^n - w_{i,j,k}^n v_{i,j,k}^n \right] - \dfrac{R \Delta t}{\Delta z} \left[ (w_{i,j,k+1}^n)^2 - (w_{i,j,k}^n)^2 \right] \\
+    & + \dfrac{\Delta t}{\Delta x^2} \left[w_{i+1,j,k}^n + w_{i-1,j,k}^n - w_{i,j,k}^n \right] + \dfrac{\Delta t}{\Delta y^2} \left[ w_{i,j+1,k}^n + w_{i,j-1,k}^n - w_{i,j,k}^n \right] + \dfrac{\Delta t}{\Delta z^2} \left[ w_{i,j,k+1}^n + w_{i,j,k-1}^n - w_{i,j,k}^n \right] \\
+    & - \dfrac{\Delta t}{\delta \Delta z} \left( \rho_{i,j,k+1}^n - \rho_{i,j,k}^n \right)
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+    \rho^{n+1} = \rho^n - \Delta t \left[ \dfrac{u_{i+1,j,k}^n - u_{i,j,k}^n}{\Delta x} + \dfrac{v_{i,j+1,k}^n - v_{i,j,k}^n}{\Delta y} + \dfrac{w_{i,j,k+1} - w_{i,j,k}}{\Delta z} \right]
+\end{aligned}
+\]
+
+
+
+For boundary nodes, we have:
+
+
+\end{document}

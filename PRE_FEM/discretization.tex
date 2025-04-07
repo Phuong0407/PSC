@@ -1,0 +1,45 @@
+\documentclass[12pt, a4paper]{book}
+
+\usepackage{amsmath}
+
+\usepackage{svg}
+\usepackage[inner = 2 cm, outer = 2 cm, top = 2cm, bottom = 2 cm, paperheight = 27 cm, paperwidth = 19 cm]{geometry}
+\begin{document}
+
+% \begin{figure}
+%     \includesvg{structured_grid}
+% \end{figure}
+
+On the first rectangular domain
+\begin{align*}
+    & \psi(x + \Delta x_1, y) = \psi(x,y) + \dfrac{\partial \psi}{\partial x}\Delta x_1 + \dfrac{\partial^2 \psi}{\partial x^2} \dfrac{\Delta x_1^2}{2} \\
+    & \psi(x - \Delta x_1, y) = \psi(x,y) - \dfrac{\partial \psi}{\partial x}\Delta x_1 + \dfrac{\partial^2 \psi}{\partial x^2} \dfrac{\Delta x_1^2}{2} \\
+    & \psi(x, y + \Delta y_2) = \psi(x,y) + \dfrac{\partial \psi}{\partial y}\Delta y_1 + \dfrac{\partial\Delta y_1^2 \psi}{\partial y^2} \dfrac{\Delta y_1^2}{2} \\
+    & \psi(x, y - \Delta y_2) = \psi(x,y) - \dfrac{\partial \psi}{\partial y}\Delta y_1 + \dfrac{\partial^2 \psi}{\partial y^2} \dfrac{\Delta y_1^2}{2}
+\end{align*}
+
+Therefore
+\begin{align*}
+    \Delta \psi = \dfrac{\partial^2 \psi}{\partial x^2} + \dfrac{\partial^2 \psi}{\partial y^2} = & \dfrac{\psi(x + \Delta x_1, y) + \psi(x - \Delta x_1, y) - 2\psi(x, y)}{\Delta x_2^2} \\
+    & + \dfrac{\psi(x, y + \Delta y_1) + \psi(x, y - \Delta y_1) - 2\psi(x, y)}{\Delta y_2^2}
+\end{align*}
+
+\begin{align*}
+    \Delta \psi = \dfrac{\psi(i + 1, y) + \psi(i - 1, y) - 2\psi(i, j)}{\Delta x_2^2} + \dfrac{\psi(i, j + 1) + \psi(i, j - 1) - 2\psi(i, j)}{\Delta y_2^2}
+\end{align*}
+
+\begin{align}
+    \gamma_1 \psi(i, j) + \beta_1^2 \left( \psi(i + 1, y) + \psi(i - 1, y) \right) + \left( \psi(i, j + 1) + \psi(i, j - 1) \right) = 0.
+\end{align}
+
+On the second rectangular domain, using the same argument with the definition $\beta_3 = \Delta y_3 / \Delta x_3$
+
+\begin{align}
+    \gamma_3 \psi(i, j) + \beta_3^2 \left( \psi(i + 1, y) + \psi(i - 1, y) \right) + \left( \psi(i, j + 1) + \psi(i, j - 1) \right) = 0.
+\end{align}
+
+On the oblique domain:
+
+
+
+\end{document}

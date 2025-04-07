@@ -1,0 +1,106 @@
+module matrix
+    implicit none
+    private
+
+    public:: init_mat, add, mul_sca, mul_mat, trn, det, trc
+
+    integer, parameter :: dp = selected_real_kind(15, 307)
+    
+    type :: matrix_type
+        real(dp), allocatable :: val(:, :)
+        integer :: row = 0
+        integer :: col = 0
+    end type matrix_type
+
+contains
+    function init_mat(ROW, COL) result(MAT)
+        integer, intent(in) :: ROW, COL
+        type(MATRIX_TYPE) :: MAT
+
+        mat%row = ROW
+        mat%col = COL
+
+        ! Allocate memory and set all elements to zero
+        allocate(MAT%data(MAT%row, MAT%col))
+        mat%data = 0.0_dp
+    end function init_mat
+
+
+    function add(A, B) result(sum)
+        type(matrix_type), intent(in) :: A, B
+        type(matrix_type) :: sum
+
+        if (A%row /= B%row .or. A%col /= B%col)
+            print *, "Error: Matrices must have the same dimensions for addition."
+            stop
+        endif
+
+        sum%row = A%row
+        sum%col = A%col
+        allocate(sum%data(sum%row, sum%col))
+        sum%val = A%val + B%val
+    end function add
+
+    function mul_sca(sca, mat) result(sca_mat)
+        real(dp), intent(in) :: sca
+        type(matrix_type), intent(in) :: mat
+        type(matrix_type) :: sca_mat
+
+        sca_mat%row = mat%row
+        sca_mat%col = mat%col
+        sca_mat%val = mat%val * sca
+    end function mul_sca
+
+    function mul_mat(mat1, mat2) result(prod)
+        type(matrix_type), intent(in) :: mat1, mat2
+        type(matrix_type) :: prod
+
+        if (mat1%col /= mat2%row)
+            print *, "Error: Number of columns in A must match rows in B for multiplication."
+            stop
+        endif
+
+        prod%row = mat1%row
+        prod%col = mat1%col
+        allocate(prod%val(prod%row, prod%col))
+
+        prod%val = matmul(mat1%val, mat2%val)
+    end function mul_mat
+
+    function trn(mat) result(trans)
+        type(matrix_type), intent(in) :: mat
+        type(matrix_type) :: trans
+
+        trans%row = mat%col
+        trans%col = mat%row
+        allocate(trans%val(trans%row, trans%col))
+
+        trans%val = transpose(mat)
+    end function trn
+
+    function det(mat) result(detmat)
+        type(MATRIX_TYPE), intent(in) :: mat
+        real(dp) :: determinant
+        if (A%row /= A%col) then
+            print *, "Error: Determinant can only be calculated for square matrices."
+            stop
+        endif
+        ! deploy it here
+        determinant = 0.0_dp
+    end function DET
+
+    function trc(mat) result(trace)
+        type(MATRIX_TYPE), intent(in) :: mat
+        real(dp) :: trace
+
+        if (A%row /= A%col) then
+            print *, "Error: Trace can only be calculated for square matrices."
+            stop
+        endif
+
+        trace = sum(diagonal(A%data))
+    end function trc
+
+    
+
+end module matrix

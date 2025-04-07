@@ -1,0 +1,10 @@
+forces
+{
+    type forces;
+    functionObjectLibs ("libforces.so");
+    patches ("cuboid");         // <-- Replace with your actual patch name
+    rhoInf 1.225;
+    CofR (0 0 0);               // <-- Center of the cuboid
+    outputControl timeStep;
+    outputInterval 1;
+}

@@ -1,0 +1,65 @@
+.
+├── bin
+├── CrsSparseSolver.f90
+├── directory_structure.txt
+├── include
+│   ├── csr_sparse_solver.h
+│   ├── dense_system_solver.h
+│   ├── glo_stiff_system
+│   │   ├── dirichlet_bound.h
+│   │   ├── glo_stiff_system.h
+│   │   ├── loc_axisym_stiff_mat.h
+│   │   └── mod_glo_stiff_system.h
+│   ├── grid_generation
+│   │   ├── grid_dimension.h
+│   │   ├── grid_generation.h
+│   │   └── physical_domain_dimension.h
+│   └── laplace_solver.h
+├── makefile
+├── obj
+│   ├── csr_sparse_solver.o
+│   ├── dense_system_solver.o
+│   ├── glo_stiff_system
+│   │   ├── dirichlet_bound.o
+│   │   ├── glo_stiff_system.o
+│   │   ├── loc_axisym_stiff_mat.o
+│   │   └── mod_glo_stiff_system.o
+│   ├── grid_generation
+│   │   ├── grid_dimension.o
+│   │   ├── grid_generation.o
+│   │   └── physical_domain_dimension.o
+│   └── laplace_solver.o
+├── recovery_patch_conn_manager.cpp
+├── recovery_patch_conn_manager.h
+├── scr
+│   ├── csr_sparse_solver.cpp
+│   ├── csr_sparse_solver.o
+│   ├── dense_system_solver.cpp
+│   ├── dense_system_solver.o
+│   ├── glo_stiff_system
+│   │   ├── dirichlet_bound.cpp
+│   │   ├── dirichlet_bound.o
+│   │   ├── glo_stiff_system.cpp
+│   │   ├── glo_stiff_system.o
+│   │   ├── loc_axisym_stiff_mat.cpp
+│   │   ├── loc_axisym_stiff_mat.o
+│   │   ├── mod_glo_stiff_system.cpp
+│   │   └── mod_glo_stiff_system.o
+│   ├── grid_generation
+│   │   ├── grid_dimension.cpp
+│   │   ├── grid_dimension.o
+│   │   ├── grid_generation.cpp
+│   │   ├── grid_generation.o
+│   │   ├── physical_domain_dimension.cpp
+│   │   └── physical_domain_dimension.o
+│   ├── laplace_solver.cpp
+│   └── laplace_solver.o
+├── test
+├── test.cpp
+├── test.o
+└── .vscode
+    ├── launch.json
+    ├── settings.json
+    └── tasks.json
+
+12 directories, 51 files

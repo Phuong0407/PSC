@@ -1,0 +1,42 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+
+\usepackage{amsmath}
+
+\begin{document}
+
+Notre problématique consiste à déterminer la trajectoire des débris de glace après leur détachement du cône. Plus précisément, on considère un cône situé dans l'entrée de l'air d’un turboréacteur à double flux, ayant le même axe que l’entrée. Le cône est en rotation avec une vitesse angulaire $\omega$. L'air entre dans l'entrée avec une vitesse uniforme $U_\infty$. À haute altitude, la température baisse, ce qui entraîne la condensation de la vapeur d'eau dans l'air, formant une couche de glace sur la surface du cône. En raison de la rotation du cône et de l'effet aérodynamique de l'air entrant, il est possible que des morceaux de glace perdent leur cohésion et se détachent.
+
+On considère la situation dans laquelle le débris vient de détacher. Pour cela, 
+
+\begin{itemize}
+    \item La force de traînée.
+    %, caractérisée par le coefficient $C_D$.
+    \item La force de gravité.
+%    , caractérisée toujour par l'accélération gravitationnelle $\underline{g} = - g\underline{e}_z$.
+    \item La force d'inertie.
+\end{itemize}
+
+Pour la premiere force, il nous faudrait une considération plus approfondie. 
+
+\section{L'effort aérodynamique} % (fold)
+
+L'effort aérodynamique consiste à la fois en la force de traînée et le moment induit. Dans le cas de notre débris, un pavé droit, la force provient du champ de vitesse et de pression de l'écoulement de l'air. Étant donné le champ de vitesse $U(x, y, z)$ et le champ de densité $\rho(x, y, z)$ dans l'entrée de l'air, la force de trainée et le moment induit s'écrivent:
+\begin{align}
+    & \underline{F}_D := \dfrac{1}{2} \rho(x, y, z) \|\underline{v}_{debris} - U(x, y, z)\|^2 C_D(\alpha) S\\
+    & \underline{M} := \dfrac{1}{2} \rho(x, y, z) \|\underline{v}_{debris} - U(x, y, z)\|^2 C_M(\alpha) S \ell.
+\end{align}
+
+On précisera chaque formule maintenant:
+
+
+
+% section L'effort aerodynamique (end)
+
+
+
+
+
+\end{document}

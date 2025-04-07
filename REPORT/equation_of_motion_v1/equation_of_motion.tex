@@ -1,0 +1,108 @@
+\documentclass[a4paper, 12pt]{book}
+
+\input{preamble.tex}
+
+\begin{document}
+
+\chapter{Theoretical Part}
+
+\section{Equation of Motions}
+
+We will consider the equation of motion, there are only two force that are important
+\begin{align}
+    m \vec{a} &= m \vec{g} + \vec{F}_{aerodynamics} + \vec{F}_{inertia} \\
+    I \ddot{\omega} &= \vec{M}_{gravity} + \vec{M}_{aerodynamics} + \vec{M}_{inertia}
+\end{align}
+The inertia force relate to this motion is due to the acceleration of the airplane only, therefore
+\begin{align}
+    \vec{F}_{inertia} = - m \vec{a}_{airplane}
+\end{align}
+
+The aerodynamic force could be projected into two components, the lift and the drag; however, in this general configuration, we will project them generally into  three compments along three axes. First, we have the components of aerodynamic force based on lift, drag and lateral directions:
+\begin{align}
+    \vec{F}_{aerodynamics} = \dfrac{1}{2} \rho_\infty \| \vec{v}_{ice} - \vec{v}_{air} \| (\vec{v}_{ice} - \vec{v}_{air}) C_{aerodynamics},
+\end{align}
+where $C_{aerodynamics}$ are all aerodynamic coefficients.
+
+For the sake of simplicity, we will employ $C_x$, $C_y$ and $C_z$ the aerodynamic force coefficients along axes $x$, $y$ and $z$ of fixed-body coordinates system could be written:
+\begin{align}
+    \vec{F}_{A, x} = \dfrac{1}{2} \rho_\infty \left[ (\dot{x} - u)^2 + (\dot{y} - v)^2 + (\dot{z} - w)^2 \right] C_x \\
+    \vec{F}_{A, y} = \dfrac{1}{2} \rho_\infty \left[ (\dot{x} - u)^2 + (\dot{y} - v)^2 + (\dot{z} - w)^2 \right] C_y \\
+    \vec{F}_{A, z} = \dfrac{1}{2} \rho_\infty \left[ (\dot{x} - u)^2 + (\dot{y} - v)^2 + (\dot{z} - w)^2 \right] C_z
+\end{align}
+The aerodynamic moment can be written with the same manner:
+\begin{align}
+    \vec{M}_{A, x} = \dfrac{1}{2} \rho_\infty \left[ (\dot{x} - u)^2 + (\dot{y} - v)^2 + (\dot{z} - w)^2 \right] H C_x \\
+    \vec{M}_{A, y} = \dfrac{1}{2} \rho_\infty \left[ (\dot{x} - u)^2 + (\dot{y} - v)^2 + (\dot{z} - w)^2 \right] H C_y \\
+    \vec{M}_{A, z} = \dfrac{1}{2} \rho_\infty \left[ (\dot{x} - u)^2 + (\dot{y} - v)^2 + (\dot{z} - w)^2 \right] H C_z
+\end{align}
+$H$ is a reference length from ice rectangular cuboid; $u$, $v$ and $w$ are the velocity of flow field with respect to fixed-body coordinate system.
+
+An arbitrary velocity vector is transformed from a fixed coordinates system to body-fixed coordinates system by the following matrix multiplication:
+\begin{align}
+    \begin{bmatrix}
+        \dot{x} \\
+        \dot{y} \\
+        \dot{z}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        c_\theta c_\psi & c_\theta s_\psi & -s_\theta \\
+        -c_\phi s_\psi + s_\phi s_\theta c_\psi & c_\phi c_\psi + s_\phi s_\theta s_\psi & s_\phi c_\theta \\
+        s_\phi s_\psi + c_\phi s_\theta c_\psi & -s_\phi c_\psi + c_\phi s_\theta s_\psi & c_\phi c_\theta
+    \end{bmatrix}\cdot
+    \begin{bmatrix}
+        \dot{X} \\
+        \dot{Y} \\
+        \dot{Z}
+    \end{bmatrix},
+\end{align}
+where $(\psi, \theta, \phi)$ are Euler's angle: rotating the fixed coordinates system successively angle $\psi$, $\theta$, $\phi$ about the axes $Z$, $y'$ and $x''$. We denote this matrix as $\underline{\underline{R}}_{\psi, \theta, \phi}$, then we could write the transformation of flow field velocity:
+\begin{align}
+    \begin{bmatrix}
+        u \\
+        v \\
+        w
+    \end{bmatrix}
+    = \underline{\underline{R}}_{\psi, \theta, \phi}
+    \cdot
+    \begin{bmatrix}
+        U \\
+        V \\
+        W
+    \end{bmatrix}
+\end{align}
+
+Then we could write the equation of motion with the following notation for the rotation of ice cuboid $\boldsymbol{\omega} = \omega_x \vec{e}_x + \omega_y \vec{e}_y + \omega_z \vec{e}_z$:
+\begin{align}
+    F_x & = m(\dot{x} + \omega_y \dot{z} - \omega_z \dot{y}) \\
+    F_y & = m(\dot{y} + \omega_z \dot{x} - \omega_x \dot{x}) \\
+    F_z & = m(\dot{z} + \omega_x \dot{y} - \omega_y \dot{z}) \\
+    M_x & = I_x\dot{\omega}_x + I_z\omega_z \omega_y - I_y \omega_y \omega_z \\
+    M_y & = I_y\dot{\omega}_y + I_x\omega_x \omega_z - I_z\omega_z \omega_x \\
+    M_z & = I_z\dot{\omega}_z + I_y\omega_y \omega_x - I_x\omega_x \omega_y
+\end{align}
+where we choose the origin is at the center of mass, then $I_{xy} = I_{yz} = I_{zx} = 0$. This leads to the last three equations of moment.
+
+\begin{align}
+    F_i = F_{A, i} + m g_i \quad\text{and}\quad M_i = M_{A, i}
+\end{align}
+where
+\begin{align}
+    \begin{bmatrix}
+        g_x \\
+        g_y \\
+        g_z
+    \end{bmatrix} =
+    \underline{\underline{R}}_{\psi, \theta, \phi}
+    \cdot
+    \begin{bmatrix}
+        0 \\
+        0 \\
+        g
+    \end{bmatrix}
+\end{align}
+
+The rest of the problem is to determine aerodynamic coefficients. This is the suject of the following section.
+
+\end{document}

@@ -1,0 +1,66 @@
+\documentclass[a4paper,12pt]{book}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+\DeclareMathOperator{\Div}{div}
+
+\usepackage[inner = 2cm, outer = 2cm, top = 2cm, bottom = 2cm]{geometry}
+
+\begin{document}
+
+\section*{Stress Analysis in Cone} % (fold)
+\label{sec:Stress_Analysis_in_Cone}
+
+We first solve the small problem of rotating cone. Suppose that the cone has the height $H$ and inner radius $r_i$ and $r_e$ as a function of the cone height $z$, with the uniform density $\rho$. This cone rotates with a uniform rotation $\omega$ in an airflow at the inlet of a turbojet engine.
+
+We examine the effect of rotation in stress of this cone. By using Cauchy stress, we have
+
+\begin{align}
+    \Div \underline{\underline{\sigma}} + \rho \underline{f} = 0.
+\end{align}
+
+We assume that elastic waves is absent, so that the configuration is truly symmetric about the rotation axis $z$. This assumption maybe oversimplified and need a justification by experiment. But we neglect the question of validity now and attempt to obtain an analytical solution for this problem. The Cauchy stress tensor is expressed:
+\begin{align}
+    \underline{\underline{\sigma}} := \sigma_{rr}\vec{e}_r \otimes \vec{e}_r + \sigma_{\theta \theta}\vec{e}_\theta \otimes \vec{e}_\theta + \sigma_{z z}\vec{e}_z \otimes \vec{e}_z
+\end{align}
+From this the divergence of this tensor is written as
+\begin{align*}
+    \sigma_{rr}' + \dfrac{\sigma_{rr} - \sigma_{\theta \theta}}{r},
+\end{align*}
+which gives
+\begin{align}
+    \sigma_{rr}' + \dfrac{\sigma_{rr} - \sigma_{\theta \theta}}{r} + \rho \omega^2 r = 0.
+\end{align}
+
+The compatibility condition gives us
+\begin{align}
+    \varepsilon_{rr} = \varepsilon_{\theta \theta} + r\varepsilon_{\theta \theta}'
+\end{align}
+If we assume that the materials is isotropic, this is the majority of case of metals, then
+\begin{align}
+    \varepsilon_{rr} = \dfrac{\sigma_{rr}}{E} - \dfrac{\nu \sigma_{\theta\theta}}{E}
+    \quad\text{and}\quad
+    \varepsilon_{\theta\theta} = \dfrac{\sigma_{\theta \theta}}{E} - \dfrac{\nu \sigma_{rr}}{E}
+\end{align}
+This gives us
+\begin{align}
+    r\sigma_{rr}'' + 3\sigma_{rr}' + \rho \omega^2 r (3 + \nu) = 0.
+\end{align}
+
+Integrate them gives us
+\begin{align}
+    \sigma_{rr} = - \dfrac{\rho \omega^2 r}{8} (3 + \nu) + \dfrac{A}{r^2} + B
+    \quad\text{and}\quad
+    \sigma_{\theta \theta} = - \dfrac{\rho \omega^2 r}{8} (1 + 3\nu) - \dfrac{A}{r^2} + B
+\end{align}
+
+With the condition $\sigma_{rr}(r_i) = p_0$ and $\sigma_{rr}(r_e) = p_e$, which give us:
+\begin{align}
+    \sigma_{rr}(r) &= p_i \cos\theta + (p_e - p_i) \cos\theta \dfrac{r_i^2 - r^2}{r_i^2 - r_e^2}\dfrac{r_e^2}{r^2} + \dfrac{\rho \omega^2}{8} \dfrac{3 + \nu}{r^2} (r_e^2 - r^2)(r^2 - r_i^2)\\
+    \sigma_{\theta \theta}(r) &= p_i \cos\theta + (p_e - p_i) \cos\theta \dfrac{r_i^2 + r^2}{r_i^2 - r_e^2}\dfrac{r_e^2}{r^2} + \dfrac{\rho \omega^2}{8} \left[ \dfrac{3 + \nu}{r^2} (r_e^2 + r^2)(r^2 + r_i^2) - 4(1 + \nu) r^2 \right]\\
+    % \sigma_{z z}(r) &= (p_e - p_i) \sin\theta.
+\end{align}
+% section Stress Analysis in Cone (end)
+\end{document}

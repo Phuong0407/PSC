@@ -1,0 +1,61 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage[margin=2cm,a3paper]{geometry}
+
+\begin{document}
+
+\[
+\begin{aligned}
+    \dfrac{\partial u}{\partial x} + \dfrac{\partial v}{\partial y} + \dfrac{\partial w}{\partial z} = 0
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+    {\Delta y \Delta z} \left( u_{i+1/2,j,k}^{n+1} - u_{i-1/2,j,k}^{n+1}\right)
+    + {\Delta x \Delta z} \left( u_{i,j+1/2,k}^{n+1} - u_{i,j-1/2,k}^{n+1}\right)
+    + {\Delta x \Delta y} \left( u_{i,j,k+1/2}^{n+1} - u_{i,j,k-1/2}^{n+1}\right) = 0.
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+    \dfrac{\partial u}{\partial t}
+    + \dfrac{\partial}{\partial x} \left( u^2 - \dfrac{1}{Re}\dfrac{\partial u}{\partial x} \right)
+    + \dfrac{\partial}{\partial y} \left( uv - \dfrac{1}{Re}\dfrac{\partial u}{\partial y} \right)
+    + \dfrac{\partial}{\partial z} \left( uw - \dfrac{1}{Re}\dfrac{\partial u}{\partial z} \right) = 0.
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+    \dfrac{\partial u}{\partial t} = \dfrac{u_{i+1/2,j,k}^{n+1} - u_{i+1/2,j,k}^{n}}{\Delta t}
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+    \dfrac{\partial}{\partial x} \left( u^2 - \dfrac{1}{Re}\dfrac{\partial u}{\partial x} \right) = \dfrac{F_{i+1/2,j,k}^{(1)} - F_{i-1/2,j,k}^{(1)}}{\Delta x} = \dfrac{u_{i+1/2,j,k}^n u_{i+1/2,j,k}^{n+1}}{\Delta x} - \dfrac{1}{Re} \dfrac{u_{i+1,j,k}^{n+1} + u_{i-1,j,k}^{n+1} - 2 u_{i,j,k}^{n+1}}{\Delta x^2}
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+    \dfrac{\partial}{\partial y} \left( uv - \dfrac{1}{Re}\dfrac{\partial u}{\partial y} \right) = \dfrac{G_{i,j+1/2,k}^{(1)} - G_{i,j-1/2,k}^{(1)}}{\Delta y} = \dfrac{}{\Delta y}
+\end{aligned}
+\]
+
+
+
+\[
+\begin{aligned}
+    \frac{\partial}{\partial y} \left( uv - \frac{1}{Re} \frac{\partial u}{\partial y} \right) \approx 
+    \frac{1}{\Delta y} \left[ 
+    \left( u_{i+\frac{1}{2},j+\frac{1}{2},k} \cdot v_{i,j+\frac{1}{2},k} - \frac{1}{Re} \cdot \frac{u_{i+\frac{1}{2},j+1,k} - u_{i+\frac{1}{2},j,k}}{\Delta y} \right) -
+    \left( u_{i+\frac{1}{2},j-\frac{1}{2},k} \cdot v_{i,j-\frac{1}{2},k} - \frac{1}{Re} \cdot \frac{u_{i+\frac{1}{2},j,k} - u_{i+\frac{1}{2},j-1,k}}{\Delta y} \right)
+    \right].
+\end{aligned}
+\]
+
+\end{document}
